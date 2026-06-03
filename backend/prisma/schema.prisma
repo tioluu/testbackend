@@ -24,14 +24,28 @@ model Vendor {
   id           Int     @id @default(autoincrement())
   products     Product[]
   createdAt    DateTime      @default(now())
-  userId       Int
+  userId       Int  
   user         User     @relation(fields: [userId], references: [id])
 } 
 model Product { 
   id        Int     @id @default(autoincrement()) 
-  vendorId  Int
   name      String
   price     Int
   image     String
+  images    Image[]
+  category  Category[]
+  vendorId  Int
   vendor    Vendor    @relation(fields: [vendorId], references: [id]) 
 } 
+model Category {
+  id        Int   @id @default(autoincrement())
+  name      String
+  // productId Int
+  product   Product[]
+
+}
+model Image {
+  id        Int   @id @default(autoincrement())
+  name      String
+  product   Product[]
+}
