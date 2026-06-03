@@ -1,6 +1,0 @@
-@VendorHub_HostAddress = http://localhost:5298
-
-GET {{VendorHub_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
