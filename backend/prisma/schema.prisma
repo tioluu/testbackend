@@ -18,34 +18,40 @@ model User {
   fullName     String
   passwordHash String
   createdAt    DateTime      @default(now())
-  vendors      Vendor[]
+  vendor       Vendor?
 } 
 model Vendor { 
   id           Int     @id @default(autoincrement())
   products     Product[]
   createdAt    DateTime      @default(now())
-  userId       Int  
+  userId       Int  @unique
   user         User     @relation(fields: [userId], references: [id])
+  store        Store?
 } 
+model Store {
+  id          Int   @id @default(autoincrement())
+  name        String @unique
+  vendorId    Int   @unique
+  vendor      Vendor @relation(fields: [vendorId], references: [id]) 
+}
 model Product { 
-  id        Int     @id @default(autoincrement()) 
-  name      String
-  price     Int
-  image     String
-  images    Image[]
-  category  Category[]
-  vendorId  Int
-  vendor    Vendor    @relation(fields: [vendorId], references: [id]) 
+  id          Int     @id @default(autoincrement()) 
+  name        String
+  price       Int
+  images      Image[]
+  categories  Category[]
+  vendorId    Int
+  vendor      Vendor    @relation(fields: [vendorId], references: [id]) 
 } 
 model Category {
-  id        Int   @id @default(autoincrement())
-  name      String
-  // productId Int
-  product   Product[]
+  id          Int   @id @default(autoincrement())
+  name        String
+  product     Product[]
 
 }
 model Image {
-  id        Int   @id @default(autoincrement())
-  name      String
-  product   Product[]
+  id          Int   @id @default(autoincrement())
+  url        String
+  productId   Int
+  product     Product @relation(fields: [productId], references: [id]) 
 }
