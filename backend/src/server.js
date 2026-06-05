@@ -1,11 +1,16 @@
-const express = require('express')
-const app = express()
-const port = 3000
+import "dotenv/config";
+import express from "express";
+import prisma from "../lib/prisma.js";
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const app = express();
+const port = 3000;
+
+app.get("/", async (req, res) => {
+  const users = await prisma.user.findMany();
+
+  res.json(users);
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Server running on port ${port}`);
+});
