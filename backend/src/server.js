@@ -7,9 +7,11 @@ import listUser from "./routes/users.js";
 
 const app = express();
 
-app.use("/vendors", listVendor);
+app.use(express.json());
+app.use("/vendor", listVendor);
 app.use("/", homePage);
-app.use("/users", listUser )
+app.use("/user", listUser )
+app.use("/create", listUser)
 
 const port = 3000;
 
