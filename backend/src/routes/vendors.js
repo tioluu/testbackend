@@ -4,9 +4,9 @@ import prisma from "../../lib/prisma.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const vendors = await prisma.vendor.findMany();
+    const vendor = await prisma.vendor.findMany();
 
-    res.json(vendors);
+    res.json(vendor);
 });
 
 export default router;
