@@ -1,9 +1,9 @@
 import express from "express";
-import { forgot_password } from "../controller/userController.js";
+import { viewProduct } from "../controller/productController.js";
 import { authenticateToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post ("/forgot_password", forgot_password);
+router.get ("/view_product", viewProduct);
 
 export default router;
